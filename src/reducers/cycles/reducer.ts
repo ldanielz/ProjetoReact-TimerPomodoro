@@ -18,16 +18,12 @@ interface CyclesState {
 
 export function CyclesReducer(state: CyclesState, action: any) {
   switch (action.type) {
-    case ActionTypes.ADD_NEW_CYCLE:
-      // return {
-      //   ...state,
-      //   cycles: [...state.cycles, action.payload.newCycle],
-      //   activeCycleId: action.payload.newCycle.id,
-      // }
+    case ActionTypes.ADD_NEW_CYCLE: {
       return produce(state, (draft) => {
         draft.cycles.push(action.payload.newCycle)
         draft.activeCycleId = action.payload.newCycle.id
       })
+    }
     case ActionTypes.INTERRUPT_CURRENT_CYCLE: {
       const currentCycleIndex = state.cycles.findIndex((cycle) => {
         return cycle.id === state.activeCycleId
